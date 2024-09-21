@@ -1,4 +1,4 @@
-﻿using Fitness_Tracker.Data;
+﻿using Fitness_Tracker.Infrastucture.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
