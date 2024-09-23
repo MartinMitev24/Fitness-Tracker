@@ -1,4 +1,5 @@
-﻿using Fitness_Tracker.Infrastucture.Data;
+﻿using Fitness_Tracker.Infrastructure.Data.Common;
+using Fitness_Tracker.Infrastucture.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationsServices(this IServiceCollection services)
         {
+            
             return services;
         }
 
@@ -17,6 +19,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            services.AddScoped<IRepository, Repository>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
             
