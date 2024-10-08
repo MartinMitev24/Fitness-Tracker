@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Fitness_Tracker.Infrastructure.Data.Constants.DataConstants;
+﻿using static Fitness_Tracker.Infrastructure.Data.Constants.DataConstants;
 
 
 namespace Fitness_Tracker.Infrastructure.Data.Constants
