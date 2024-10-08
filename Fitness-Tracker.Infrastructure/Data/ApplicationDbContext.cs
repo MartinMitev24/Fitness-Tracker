@@ -14,5 +14,7 @@ namespace Fitness_Tracker.Infrastucture.Data
         DbSet<Exercise> Exercises { get; set; }
 
         DbSet<Intensity> intensities { get; set; }
+
+        DbSet<Workout> Workouts { get; set; }
     }
 }
