@@ -1,4 +1,6 @@
-﻿using Fitness_Tracker.Infrastructure.Data.Common;
+﻿using Fitness_Tracker.Core.Contracts;
+using Fitness_Tracker.Core.Services;
+using Fitness_Tracker.Infrastructure.Data.Common;
 using Fitness_Tracker.Infrastucture.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +11,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationsServices(this IServiceCollection services)
         {
-            
+            services.AddScoped<IExerciseService, ExerciseService>();
+
             return services;
         }
 
