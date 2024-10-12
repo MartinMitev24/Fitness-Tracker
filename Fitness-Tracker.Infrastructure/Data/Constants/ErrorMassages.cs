@@ -3,10 +3,10 @@
 
 namespace Fitness_Tracker.Infrastructure.Data.Constants
 {
-    public class ErrorMassages
+    public static class ErrorMassages
     {
-        public string ExerciseNameErrorMassage = $"Exercise name can be between {ExerciseNameMinLength} and {ExerciseNameMaxLength}";
-        public string ExerciseDescriptionErrorMassage = $"Exercise name can be between {ExerciseDescriptionMinLength} and {ExerciseDescriptionMaxLength}";
-        
+        public const string RequiredFieldMessage = "The {0} field is required!";
+
+        public const string StringLengthMessage = "The {0} field must be between {2} and {1} characters long!";
     }
 }
