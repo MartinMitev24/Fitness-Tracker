@@ -2,7 +2,7 @@
 {
     public enum TargetMuscleGroup
     {
-        None = 0,
+        Stretches = 0,
         Chest = 1,
         Back = 2,
         Shoulder = 3,
