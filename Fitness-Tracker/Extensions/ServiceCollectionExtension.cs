@@ -26,11 +26,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IRepository, Repository>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
-            
+
             return services;
         }
 
-        public static IServiceCollection AddAplicationIdentity(this IServiceCollection services, IConfiguration config) 
+        public static IServiceCollection AddAplicationIdentity(this IServiceCollection services, IConfiguration config)
         {
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
