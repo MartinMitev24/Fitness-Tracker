@@ -20,5 +20,13 @@ namespace Fitness_Tracker.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            ExerciseViewModel model = await _exerciseService.FindExercise(id);
+
+            return View(model);
+        }
     }
 }
