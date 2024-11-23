@@ -10,5 +10,7 @@ namespace Fitness_Tracker.Core.Contracts
     public interface IExerciseService
     {
         Task<IEnumerable<ExerciseViewModel>> GetAllAsync();
+
+        Task<ExerciseViewModel> FindExercise(int id);
     }
 }

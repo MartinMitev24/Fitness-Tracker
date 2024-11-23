@@ -27,5 +27,20 @@ namespace Fitness_Tracker.Core.Services
                 })
                 .ToListAsync();
         }
+
+        public async Task<ExerciseViewModel> FindExercise(int id)
+        {
+            var exercise = await _repository.AllReadOnly<Exercise>()
+                .Select(e => new ExerciseViewModel
+                {
+                    Id = e.Id,
+                    ExerciseName = e.ExerciseName,
+                    ExerciseDescription = e.ExerciseDescription,
+                    TargetMuscleGroup = e.TargetMuscleGroup
+                })
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            return exercise;
+        }
     }
 }
