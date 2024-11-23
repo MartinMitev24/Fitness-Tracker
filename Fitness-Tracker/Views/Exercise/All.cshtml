@@ -44,19 +44,19 @@
                                     <div class="row g-0">
                                         <div class="col-md-7 p-1">
                                             <div class="card-header bg-light border-secondary" style="max-height: 20%">
-                                                <h4>Header</h4>
+                                                <h4>@item.ExerciseName</h4>
                                             </div>
-                                            <div class="card-body text-dark" style="min-height: 61%">
-                                                <p class="card-text text-truncate text-break">Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            <div class="card-body text-dark" style="min-height: 60%">
+                                                <p class="card-text text-truncate text-break">@item.ExerciseDescription</p>
                                             </div>
                                             <div class="card-footer bg-primary border-secondary" style="min-height: 15%">
                                                 <div class="d-grid justify-content-around p-0">
                                                     <div class="btn-toolbar gap-lg-5" role="toolbar" aria-label="Toolbar with button groups">
                                                         <div>
-                                                            <a class="btn btn-sm btn-outline-dark bg-info bg-opacity-75" asp-controller="Exercise" asp-action="Details" asp-route-id="" asp-route-information="">Details</a>
+                                                            <a class="btn btn-sm btn-outline-dark bg-info bg-opacity-75" asp-controller="Exercise" asp-action="Details" asp-route-id="@item.Id" asp-route-information="">Details</a>
                                                         </div>
                                                         <div>
-                                                            <a class="btn btn-sm btn-outline-dark bg-warning bg-opacity-75" asp-controller="Exercise" asp-action="Edit" asp-route-id="" asp-route-information="">Request Edit</a>
+                                                            <a class="btn btn-sm btn-outline-dark bg-warning bg-opacity-75" asp-controller="Exercise" asp-action="Edit" asp-route-id="@item.Id" asp-route-information="">Request Edit</a>
                                                         </div>
                                                     </div>
                                                 </div>
