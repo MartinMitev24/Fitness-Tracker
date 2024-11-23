@@ -1,4 +1,5 @@
 ﻿using Fitness_Tracker.Infrastructure.Data.Models;
+using Fitness_Tracker.Infrastructure.Data.SeedDb;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,10 +12,17 @@ namespace Fitness_Tracker.Infrastucture.Data
         {
         }
 
-        DbSet<Exercise> Exercises { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfiguration(new ExerciseConfiguration());
 
-        DbSet<Intensity> intensities { get; set; }
+            base.OnModelCreating(builder);
+        }
 
-        DbSet<Workout> Workouts { get; set; }
+        DbSet<Exercise> Exercises { get; set; } = null!;
+
+        DbSet<Intensity> intensities { get; set; } = null!;
+
+        DbSet<Workout> Workouts { get; set; } = null!;
     }
 }
