@@ -1,9 +1,4 @@
 ﻿using Fitness_Tracker.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fitness_Tracker.Core.Contracts
 {
@@ -12,5 +7,9 @@ namespace Fitness_Tracker.Core.Contracts
         Task<IEnumerable<ExerciseViewModel>> GetAllAsync();
 
         Task<ExerciseViewModel> FindExercise(int id);
+
+        Task<ExerciseFormModel> GetExercise(int id);
+
+        Task EditExercise(ExerciseFormModel model);
     }
 }

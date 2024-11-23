@@ -42,5 +42,35 @@ namespace Fitness_Tracker.Core.Services
 
             return exercise;
         }
+
+        public async Task<ExerciseFormModel> GetExercise(int id)
+        {
+            var exercise = await _repository.AllReadOnly<Exercise>()
+                .Select(e => new ExerciseFormModel
+                {
+                    Id = e.Id,
+                    ExerciseName = e.ExerciseName,
+                    ExerciseNewName = e.ExerciseName,
+                    ExerciseDescription = e.ExerciseDescription,
+                    ExerciseNewDescription = e.ExerciseDescription,
+                    TargetMuscleGroup = e.TargetMuscleGroup,
+                    NewTargetMuscleGroup = e.TargetMuscleGroup
+                })
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            return exercise;
+        }
+
+        public async Task EditExercise(ExerciseFormModel model)
+        {
+            var exercise = await _repository.All<Exercise>()
+                .FirstAsync(e => e.Id == model.Id);
+
+            exercise.ExerciseName = model.ExerciseNewName;
+            exercise.ExerciseDescription = model.ExerciseNewDescription;
+            exercise.TargetMuscleGroup = model.NewTargetMuscleGroup;
+
+            await _repository.SaveAsync();
+        }
     }
 }
