@@ -36,5 +36,8 @@ namespace Fitness_Tracker.Core.Models.Exercise
         public TargetMuscleGroup TargetMuscleGroup { get; set; }
 
         public TargetMuscleGroup NewTargetMuscleGroup { get; set; }
+
+        [Url]
+        public string ImageUrl { get; set; } = string.Empty;
     }
 }

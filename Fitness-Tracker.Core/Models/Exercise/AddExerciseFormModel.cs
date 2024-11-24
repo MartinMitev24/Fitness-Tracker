@@ -17,5 +17,8 @@ namespace Fitness_Tracker.Core.Models.Exercise
 
         [Required]
         public TargetMuscleGroup TargetMuscleGroup { get; set; }
+
+        [Url]
+        public string ImageUrl { get; set; } = string.Empty;
     }
 }
