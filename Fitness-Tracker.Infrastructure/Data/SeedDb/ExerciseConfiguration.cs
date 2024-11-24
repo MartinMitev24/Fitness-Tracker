@@ -17,7 +17,7 @@ namespace Fitness_Tracker.Infrastructure.Data.SeedDb
         {
             var data = new SeedData();
 
-            builder.HasData(new Exercise[] { data.Squats });
+            builder.HasData(new Exercise[] { data.Squats, data.BicepCurls, data.TricepExetnsions, data.CableRow, data.BenchPress, data.ShoulderPress, data.Crunches, data.DynamicStretching });
         }
     }
 }
