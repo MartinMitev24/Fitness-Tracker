@@ -71,6 +71,7 @@ namespace Fitness_Tracker.Core.Services
             exercise.ExerciseName = model.ExerciseNewName;
             exercise.ExerciseDescription = model.ExerciseNewDescription;
             exercise.TargetMuscleGroup = model.NewTargetMuscleGroup;
+            exercise.ImageUrl = model.ImageUrl;
 
             await _repository.SaveAsync();
         }
@@ -81,7 +82,8 @@ namespace Fitness_Tracker.Core.Services
             {
                 ExerciseName = model.ExerciseName,
                 ExerciseDescription = model.Description,
-                TargetMuscleGroup = model.TargetMuscleGroup
+                TargetMuscleGroup = model.TargetMuscleGroup,
+                ImageUrl = model.ImageUrl
             };
 
             await _repository.AddAsync(newExercise);
