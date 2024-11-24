@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using static Fitness_Tracker.Infrastructure.Data.Constants.DataConstants;
 using static Fitness_Tracker.Infrastructure.Data.Constants.ErrorMassages;
 
-namespace Fitness_Tracker.Core.Models
+namespace Fitness_Tracker.Core.Models.Exercise
 {
     public class ExerciseFormModel
     {

@@ -1,6 +1,6 @@
 ﻿using Fitness_Tracker.Infrastructure.Data.Enums;
 
-namespace Fitness_Tracker.Core.Models
+namespace Fitness_Tracker.Core.Models.Exercise
 {
     public class ExerciseViewModel
     {

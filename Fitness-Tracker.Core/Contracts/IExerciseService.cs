@@ -1,4 +1,4 @@
-﻿using Fitness_Tracker.Core.Models;
+﻿using Fitness_Tracker.Core.Models.Exercise;
 
 namespace Fitness_Tracker.Core.Contracts
 {

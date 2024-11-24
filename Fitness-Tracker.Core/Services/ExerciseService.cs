@@ -1,5 +1,5 @@
 ﻿using Fitness_Tracker.Core.Contracts;
-using Fitness_Tracker.Core.Models;
+using Fitness_Tracker.Core.Models.Exercise;
 using Fitness_Tracker.Infrastructure.Data.Common;
 using Fitness_Tracker.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
