@@ -43,10 +43,10 @@ namespace Fitness_Tracker.Core.Services
             return exercise;
         }
 
-        public async Task<ExerciseFormModel> GetExercise(int id)
+        public async Task<EditExerciseFormModel> GetExercise(int id)
         {
             var exercise = await _repository.AllReadOnly<Exercise>()
-                .Select(e => new ExerciseFormModel
+                .Select(e => new EditExerciseFormModel
                 {
                     Id = e.Id,
                     ExerciseName = e.ExerciseName,
@@ -61,7 +61,7 @@ namespace Fitness_Tracker.Core.Services
             return exercise;
         }
 
-        public async Task EditExercise(ExerciseFormModel model)
+        public async Task EditExercise(EditExerciseFormModel model)
         {
             var exercise = await _repository.All<Exercise>()
                 .FirstAsync(e => e.Id == model.Id);

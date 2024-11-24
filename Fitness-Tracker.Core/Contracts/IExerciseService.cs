@@ -8,8 +8,8 @@ namespace Fitness_Tracker.Core.Contracts
 
         Task<ExerciseViewModel> FindExercise(int id);
 
-        Task<ExerciseFormModel> GetExercise(int id);
+        Task<EditExerciseFormModel> GetExercise(int id);
 
-        Task EditExercise(ExerciseFormModel model);
+        Task EditExercise(EditExerciseFormModel model);
     }
 }

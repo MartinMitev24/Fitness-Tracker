@@ -5,7 +5,7 @@ using static Fitness_Tracker.Infrastructure.Data.Constants.ErrorMassages;
 
 namespace Fitness_Tracker.Core.Models.Exercise
 {
-    public class ExerciseFormModel
+    public class EditExerciseFormModel
     {
         /// <summary>
         /// The Identifier of the exercice.

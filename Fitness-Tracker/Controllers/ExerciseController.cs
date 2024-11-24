@@ -38,7 +38,7 @@ namespace Fitness_Tracker.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(ExerciseFormModel model)
+        public async Task<IActionResult> Edit(EditExerciseFormModel model)
         {
             int exerciseId = model.Id;
 
