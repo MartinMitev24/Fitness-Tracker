@@ -19,8 +19,10 @@
     </div>
 
     <div class="clearfix">
-        <div class="col-4 float-end">
-            <img src="@Model.ImageUrl" class="img-fluid bg-primary" alt="No image yet." />
+        <div class="col-4 float-end" style="height: 500px">
+            <div class="rounded-1 overflow-hidden d-block align-content-center bg-secondary" style="height: 100%">
+                <img src="@Model.ImageUrl" class="" alt="No image yet." style="width: 100%" />
+            </div>
         </div>
         <p class="text-md-start">@Model.ExerciseDescription</p>
     </div>
