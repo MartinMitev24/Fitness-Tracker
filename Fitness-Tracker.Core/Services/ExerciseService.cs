@@ -23,7 +23,8 @@ namespace Fitness_Tracker.Core.Services
                     Id = e.Id,
                     ExerciseName = e.ExerciseName,
                     ExerciseDescription = e.ExerciseDescription,
-                    TargetMuscleGroup = e.TargetMuscleGroup
+                    TargetMuscleGroup = e.TargetMuscleGroup,
+                    ImageUrl = e.ImageUrl,
                 })
                 .ToListAsync();
         }
@@ -36,7 +37,8 @@ namespace Fitness_Tracker.Core.Services
                     Id = e.Id,
                     ExerciseName = e.ExerciseName,
                     ExerciseDescription = e.ExerciseDescription,
-                    TargetMuscleGroup = e.TargetMuscleGroup
+                    TargetMuscleGroup = e.TargetMuscleGroup,
+                    ImageUrl = e.ImageUrl
                 })
                 .FirstOrDefaultAsync(e => e.Id == id);
 

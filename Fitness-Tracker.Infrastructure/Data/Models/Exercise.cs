@@ -26,5 +26,7 @@ namespace Fitness_Tracker.Infrastructure.Data.Models
         [Required]
         [Comment("Exercise muscle group")]
         public TargetMuscleGroup TargetMuscleGroup { get; set; }
+
+        public string ImageUrl { get; set; } = string.Empty;
     }
 }

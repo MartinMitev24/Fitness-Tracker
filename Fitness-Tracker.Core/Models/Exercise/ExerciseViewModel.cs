@@ -23,5 +23,7 @@ namespace Fitness_Tracker.Core.Models.Exercise
         /// Integer value for muscle groupe of the exercice. 0=None, 1=Chest, 2=Back, 3=Shoulder, 4=Biceps, 5=Triceps, 6=Abdominal, 7=Legs and8=Compound
         /// </summary>
         public TargetMuscleGroup TargetMuscleGroup { get; set; }
+
+        public string ImageUrl { get; set; }
     }
 }
