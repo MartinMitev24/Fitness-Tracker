@@ -46,5 +46,21 @@ namespace Fitness_Tracker.Controllers
 
             return RedirectToAction(nameof(Details), new { id = exerciseId });
         }
+
+        [HttpGet]
+        public IActionResult AddExercise()
+        {
+            var model = new AddExerciseFormModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddExercise(AddExerciseFormModel model)
+        {
+            await _exerciseService.CreateExercise(model);
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }

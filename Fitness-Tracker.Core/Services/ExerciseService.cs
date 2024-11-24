@@ -72,5 +72,18 @@ namespace Fitness_Tracker.Core.Services
 
             await _repository.SaveAsync();
         }
+
+        public async Task CreateExercise(AddExerciseFormModel model)
+        {
+            var newExercise = new Exercise()
+            {
+                ExerciseName = model.ExerciseName,
+                ExerciseDescription = model.Description,
+                TargetMuscleGroup = model.TargetMuscleGroup
+            };
+
+            await _repository.AddAsync(newExercise);
+            await _repository.SaveAsync();
+        }
     }
 }
