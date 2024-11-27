@@ -1,6 +1,7 @@
 ﻿using Fitness_Tracker.Core.Contracts;
 using Fitness_Tracker.Core.Models.Workout;
 using Fitness_Tracker.Infrastructure.Data.Common;
+using Fitness_Tracker.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,19 @@ namespace Fitness_Tracker.Core.Services
     {
         private readonly IRepository _repository;
 
-        public WorkoutService(var repository)
+        public WorkoutService(IRepository repository)
         {
             _repository = repository;
         }
 
-        public Task<WorkoutViewModel> FindExercise(int id)
+        public async Task<WorkoutViewModel> FindExercise(int id)
         {
-            throw new NotImplementedException();
+            WorkoutViewModel model = await _repository
+                .AllReadOnly<Workout>()
+                .Select(w => new WorkoutViewModel 
+                {
+                    
+                })
         }
 
         public Task<IEnumerable<WorkoutViewModel>> GetAllAsync()
