@@ -37,14 +37,14 @@ namespace Fitness_Tracker.Infrastructure.Data.Models
         [Comment("Current exercise")]
         public Exercise Exercise { get; set; } = null!;
 
-        //[Required]
-        //[Comment("Workout identifier")]
-        //public int WorkoutId { get; set; }
+        [Required]
+        [Comment("Workout identifier")]
+        public int WorkoutId { get; set; }
 
-        //[ForeignKey(nameof(WorkoutId))]
+        [ForeignKey(nameof(WorkoutId))]
         //[DeleteBehavior(DeleteBehavior.Restrict)]
-        //[Comment("Current workout")]
-        //public Workout Workout { get; set; } = null!;
+        [Comment("Current workout")]
+        public Workout Workout { get; set; } = null!;
 
     }
 }

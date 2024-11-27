@@ -28,5 +28,7 @@ namespace Fitness_Tracker.Infrastructure.Data.Models
         public TargetMuscleGroup TargetMuscleGroup { get; set; }
 
         public string ImageUrl { get; set; } = string.Empty;
+
+        public IEnumerable<Intensity> Intensities { get; set; } = new List<Intensity>();
     }
 }

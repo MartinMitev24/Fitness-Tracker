@@ -16,11 +16,6 @@ namespace Fitness_Tracker.Infrastructure.Data.Models
         [Comment("Workout identifier")]
         public int Id { get; init; }
 
-        [Required]
-        [Comment("Intensity identifier")]
-        public int IntensityId { get; set; }
-
-        [ForeignKey(nameof(IntensityId))]
-        public IEnumerable<Intensity> Intensities { get; init; } = new List<Intensity>();
+        public IEnumerable<Intensity> Intensities { get; set; } = new List<Intensity>();
     }
 }
