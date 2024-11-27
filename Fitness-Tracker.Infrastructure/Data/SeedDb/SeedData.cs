@@ -20,9 +20,27 @@ namespace Fitness_Tracker.Infrastructure.Data.SeedDb
 
         public Exercise DynamicStretching { get; set; }
 
+        public Intensity SquatIntensity { get; set; }
+
+        public Intensity BicepCurlsIntensity { get; set; }
+
+        public Intensity TricepExetnsionsIntensity { get; set; }
+
+        public Intensity CableRowIntensity { get; set; }
+
+        public Intensity BenchPressIntensity { get; set; }
+
+        public Intensity ShoulderPressIntensity { get; set; }
+
+        public Intensity CrunchesIntensity { get; set; }
+
+        public Workout FirstWorkout { get; set; }
+
         public SeedData()
         {
             SeedExercises();
+            SeedWorkout();
+            SeedIntensities();
         }
 
         public void SeedExercises()
@@ -99,5 +117,94 @@ namespace Fitness_Tracker.Infrastructure.Data.SeedDb
                 ImageUrl = string.Empty
             };
         }
+
+        public void SeedWorkout()
+        {
+            FirstWorkout = new Workout()
+            {
+                Id = 1
+            };
+        }
+
+        public void SeedIntensities()
+        {
+            SquatIntensity = new Intensity()
+            {
+                Id = 1,
+                LiftedWeight = 50,
+                Reps = 10,
+                Sets = 3,
+                AvarageTimePerSet = 45,
+                ExerciseId = Squats.Id,
+                WorkoutId = FirstWorkout.Id
+            };
+
+            BicepCurlsIntensity = new Intensity()
+            {
+                Id = 2,
+                LiftedWeight = 10,
+                Reps = 10,
+                Sets = 3,
+                AvarageTimePerSet = 45,
+                ExerciseId = BicepCurls.Id,
+                WorkoutId = FirstWorkout.Id
+            };
+
+            TricepExetnsionsIntensity = new Intensity()
+            {
+                Id = 3,
+                LiftedWeight = 10,
+                Reps = 10,
+                Sets = 3,
+                AvarageTimePerSet = 45,
+                ExerciseId = TricepExetnsions.Id,
+                WorkoutId = FirstWorkout.Id
+            };
+
+            CableRowIntensity = new Intensity()
+            {
+                Id = 4,
+                LiftedWeight = 30,
+                Reps = 10,
+                Sets = 3,
+                AvarageTimePerSet = 45,
+                ExerciseId = CableRow.Id,
+                WorkoutId = FirstWorkout.Id
+            };
+
+            BenchPressIntensity = new Intensity()
+            {
+                Id = 5,
+                LiftedWeight = 40,
+                Reps = 10,
+                Sets = 3,
+                AvarageTimePerSet = 45,
+                ExerciseId = BenchPress.Id,
+                WorkoutId = FirstWorkout.Id
+            };
+
+            ShoulderPressIntensity = new Intensity()
+            {
+                Id = 6,
+                LiftedWeight = 20,
+                Reps = 10,
+                Sets = 3,
+                AvarageTimePerSet = 45,
+                ExerciseId = ShoulderPress.Id,
+                WorkoutId = FirstWorkout.Id
+            };
+
+            CrunchesIntensity = new Intensity()
+            {
+                Id = 7,
+                LiftedWeight = 30,
+                Reps = 10,
+                Sets = 3,
+                AvarageTimePerSet = 45,
+                ExerciseId = Crunches.Id,
+                WorkoutId = FirstWorkout.Id
+            };
+        }
+
     }
 }

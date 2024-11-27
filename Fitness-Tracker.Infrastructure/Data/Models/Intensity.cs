@@ -33,7 +33,7 @@ namespace Fitness_Tracker.Infrastructure.Data.Models
         public int ExerciseId { get; set; }
 
         [ForeignKey(nameof(ExerciseId))]
-        //[DeleteBehavior(DeleteBehavior.Restrict)]
+        [DeleteBehavior(DeleteBehavior.Restrict)]
         [Comment("Current exercise")]
         public Exercise Exercise { get; set; } = null!;
 
@@ -42,7 +42,7 @@ namespace Fitness_Tracker.Infrastructure.Data.Models
         public int WorkoutId { get; set; }
 
         [ForeignKey(nameof(WorkoutId))]
-        //[DeleteBehavior(DeleteBehavior.Restrict)]
+        [DeleteBehavior(DeleteBehavior.Restrict)]
         [Comment("Current workout")]
         public Workout Workout { get; set; } = null!;
 
