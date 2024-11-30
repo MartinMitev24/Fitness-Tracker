@@ -8,6 +8,8 @@ namespace Fitness_Tracker.Core.Models.Intensity
     {
         public int Id { get; set; }
 
+        public string ExerciseName { get; set; } = string.Empty;
+
         public int LiftedWeight { get; set; }
 
         public int Reps { get; set; }
@@ -15,5 +17,7 @@ namespace Fitness_Tracker.Core.Models.Intensity
         public int Sets { get; set; }
 
         public int AvarageTimePerSet { get; set; }
+
+        public int WorkoutId { get; set; }
     }
 }
