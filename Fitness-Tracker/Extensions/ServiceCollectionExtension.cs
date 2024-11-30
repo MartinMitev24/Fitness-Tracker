@@ -12,6 +12,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddApplicationsServices(this IServiceCollection services)
         {
             services.AddScoped<IExerciseService, ExerciseService>();
+            services.AddScoped<IIntensityService, IntensityService>();
+            services.AddScoped<IWorkoutService, WorkoutService>();
 
             return services;
         }

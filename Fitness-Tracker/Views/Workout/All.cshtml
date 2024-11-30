@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WorkoutViewModel>
+
+@{
+	ViewBag.Title = "Workouts";
+}
+
+<div class="container text-center">
+	<h2>@ViewBag.Title</h2>
+</div>
+<hr />
+<div class="container">
+	<table>
+		@foreach (var workout in Model)
+		{
+			<tbody>
+				@foreach (var intensity in workout.Intensities)
+				{
+					<tr>
+						<td>@intensity.ExerciseName</td>
+						<td>@intensity.LiftedWeight</td>
+						<td>@intensity.Reps</td>
+						<td>@intensity.Sets</td>
+						<td>@intensity.AvarageTimePerSet</td>
+					</tr>
+				}
+			</tbody>
+		}
+	</table>
+</div>
