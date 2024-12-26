@@ -41,12 +41,17 @@ namespace Fitness_Tracker.Infrastructure.Data.SeedDb
 
         public IdentityUser TestUserOne { get; set; }
 
+        public Athlete AthleteOne { get; set; }
+
+        public Athlete TestAthlete { get; set; }
+
         public SeedData()
         {
             SeedExercises();
             SeedWorkout();
             SeedIntensities();
             SeedUsers();
+            SeedAthelete();
         }
 
         public void SeedExercises()
@@ -128,7 +133,8 @@ namespace Fitness_Tracker.Infrastructure.Data.SeedDb
         {
             FirstWorkout = new Workout()
             {
-                Id = 1
+                Id = 1,
+                AthleteId = 2
             };
         }
 
@@ -236,6 +242,21 @@ namespace Fitness_Tracker.Infrastructure.Data.SeedDb
                 EmailConfirmed = true,
                 PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(
                     new IdentityUser { UserName = "testOne@fitnesstracker.com" }, "12345TestOne#")
+            };
+        }
+
+        public void SeedAthelete()
+        {
+            AthleteOne = new Athlete()
+            {
+                Id = 1,
+                UserID = "8d477d39-83ed-4155-81de-a65dd76c2627"
+            };
+
+            TestAthlete = new Athlete()
+            {
+                Id = 2,
+                UserID = "99612cd5-354c-42b9-966b-779154d8055c"
             };
         }
 

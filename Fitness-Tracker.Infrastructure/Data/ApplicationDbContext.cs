@@ -15,10 +15,11 @@ namespace Fitness_Tracker.Infrastucture.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new AthleteConfiguration());
             builder.ApplyConfiguration(new ExerciseConfiguration());
             builder.ApplyConfiguration(new WorkoutConfiguration());
             builder.ApplyConfiguration(new IntensityConfiguration());
-            builder.ApplyConfiguration(new UserConfiguration());
 
             base.OnModelCreating(builder);
         }
@@ -28,5 +29,7 @@ namespace Fitness_Tracker.Infrastucture.Data
         DbSet<Intensity> Intensities { get; set; } = null!;
 
         DbSet<Workout> Workouts { get; set; } = null!;
+
+        DbSet<Athlete> Athletes { get; set; } = null!;
     }
 }
