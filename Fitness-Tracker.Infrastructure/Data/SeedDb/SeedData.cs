@@ -1,4 +1,5 @@
 ﻿using Fitness_Tracker.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Fitness_Tracker.Infrastructure.Data.SeedDb
 {
@@ -36,11 +37,16 @@ namespace Fitness_Tracker.Infrastructure.Data.SeedDb
 
         public Workout FirstWorkout { get; set; }
 
+        public IdentityUser Admin { get; set; }
+
+        public IdentityUser TestUserOne { get; set; }
+
         public SeedData()
         {
             SeedExercises();
             SeedWorkout();
             SeedIntensities();
+            SeedUsers();
         }
 
         public void SeedExercises()
@@ -203,6 +209,33 @@ namespace Fitness_Tracker.Infrastructure.Data.SeedDb
                 AvarageTimePerSet = 45,
                 ExerciseId = Crunches.Id,
                 WorkoutId = FirstWorkout.Id
+            };
+        }
+
+        public void SeedUsers()
+        {
+            Admin = new IdentityUser()
+            {
+                Id = "8d477d39-83ed-4155-81de-a65dd76c2627",
+                UserName = "admin@fitnesstracker.com",
+                NormalizedUserName = "ADMIN@FITNESSTRACKER.COM",
+                Email = "admin@fitnesstracker.com",
+                NormalizedEmail = "ADMIN@FITNESSTRACKER.COM",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(
+                    new IdentityUser { UserName = "admin@fitnesstracker.com" }, "12345Admin#")
+            };
+
+            TestUserOne = new IdentityUser()
+            {
+                Id = "99612cd5-354c-42b9-966b-779154d8055c",
+                UserName = "testOne@fitnesstracker.com",
+                NormalizedUserName = "TESTONE@FITNESSTRACKER.COM",
+                Email = "testOne@fitnesstracker.com",
+                NormalizedEmail = "TESTONE@FITNESSTRACKER.COM",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(
+                    new IdentityUser { UserName = "testOne@fitnesstracker.com" }, "12345TestOne#")
             };
         }
 
