@@ -5,25 +5,62 @@
 }
 
 <div class="container text-center">
-	<h2>@ViewBag.Title</h2>
+	<div class="row row-cols-3">
+		<div class="col-3"></div>
+		<div class="col-6">
+			<h2 class="text-center col">@ViewBag.Title</h2>
+		</div>
+		<div class="col-3">
+			<a class="btn btn-light btn-outline-primary" asp-controller="Workout" asp-action="AddWorkout">Add New Workout</a>
+		</div>
+	</div>
 </div>
 <hr />
-<div class="container">
-	<table>
-		@foreach (var workout in Model)
-		{
-			<tbody>
-				@foreach (var intensity in workout.Intensities)
-				{
-					<tr>
-						<td>@intensity.ExerciseName</td>
-						<td>@intensity.LiftedWeight</td>
-						<td>@intensity.Reps</td>
-						<td>@intensity.Sets</td>
-						<td>@intensity.AvarageTimePerSet</td>
-					</tr>
-				}
-			</tbody>
-		}
-	</table>
-</div>
+<section class="container">
+	@if(Model.Any())
+	{
+		<div class="accordion" id="workoutAccordion">
+			@foreach (var workout in Model)
+			{
+				<div class="accordion-item" style="background-color: lightsteelblue">
+					<h2 class="accordion-header">
+						<button class="accordion-button alert-info collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#workout-@workout.Id" aria-expanded="false" aria-controls="workout-@workout.Id">
+							Test workout @workout.Id
+						</button>
+					</h2>
+					<div id="workout-@workout.Id" class="accordion-collapse collapse" data-bs-parent="#workoutAccordion" style="">
+						<div class="accordion-body m-0 p-3">
+							<table class="table table-info table-hover m-0" style="width: 100%">
+								<thead>
+									<tr>
+										<th>Exercise</th>
+										<th>Weight</th>
+										<th>Reps</th>
+										<th>Sets</th>
+										<th>Avr. time</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var intensity in workout.Intensities)
+									{
+										<tr>
+											<td>@intensity.ExerciseName</td>
+											<td>@intensity.LiftedWeight</td>
+											<td>@intensity.Reps</td>
+											<td>@intensity.Sets</td>
+											<td>@intensity.AvarageTimePerSet</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	}
+	else
+	{
+	<h4>You don't have any workouts.</h4>
+	}
+</section>

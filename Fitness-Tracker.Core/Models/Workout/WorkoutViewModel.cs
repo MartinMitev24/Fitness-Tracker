@@ -4,7 +4,9 @@ namespace Fitness_Tracker.Core.Models.Workout
 {
     public class WorkoutViewModel
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
+
+        public int AthleteId { get; set; }
 
         public IEnumerable<IntensityViewModel> Intensities { get; set; } = new List<IntensityViewModel>();
     }
