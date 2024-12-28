@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +15,8 @@ namespace Fitness_Tracker.Infrastructure.Data.Models
         public int AthleteId { get; set; }
 
         [Comment("Property for User")]
+        [ForeignKey(nameof(AthleteId))]
+        [DeleteBehavior(DeleteBehavior.Restrict)]
         public Athlete Athlete { get; set; } = null!;
 
         [Comment("Property for List of intensities")]

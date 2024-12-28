@@ -17,6 +17,7 @@ namespace Fitness_Tracker.Infrastructure.Data.Models
 
         [Comment("Property For User")]
         [ForeignKey(nameof(UserID))]
+        [DeleteBehavior(DeleteBehavior.Restrict)]
         public IdentityUser User { get; set; } = null!;
 
         [Comment("Property for List of workouts")]
