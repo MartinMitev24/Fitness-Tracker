@@ -4,14 +4,10 @@ namespace Fitness_Tracker.Core.Contracts
 {
     public interface IWorkoutService
     {
-        Task<IEnumerable<WorkoutViewModel>> GetAllAsync();
+        Task<IEnumerable<WorkoutViewModel>> GetAllAsync(int athleteId);
+
+        Task<int> GetAthleteId(string userId);
 
         Task<WorkoutViewModel> FindWorkout(int id);
-
-        //Task<EditExerciseFormModel> GetExercise(int id);
-
-        //Task EditExercise(EditExerciseFormModel model);
-
-        //Task CreateExercise(AddExerciseFormModel model);
     }
 }

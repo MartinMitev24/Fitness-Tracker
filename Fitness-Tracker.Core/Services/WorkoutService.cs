@@ -1,4 +1,5 @@
 ﻿using Fitness_Tracker.Core.Contracts;
+using Fitness_Tracker.Core.Models.Athlete;
 using Fitness_Tracker.Core.Models.Intensity;
 using Fitness_Tracker.Core.Models.Workout;
 using Fitness_Tracker.Infrastructure.Data.Common;
@@ -18,47 +19,53 @@ namespace Fitness_Tracker.Core.Services
             _intensityService = intensityService;
         }
 
-        public async Task<WorkoutViewModel> FindWorkout(int id)
+        public Task<WorkoutViewModel> FindWorkout(int id)
         {
-            IEnumerable<IntensityViewModel> intensitysViewModels = await IntensityViewModels();
-
-            WorkoutViewModel workout = await _repository.AllReadOnly<Workout>()
-                .Select(w => new WorkoutViewModel
-                {
-                    Id = w.Id,
-                    Intensities = intensitysViewModels.Where(i => i.WorkoutId == id).ToList() ?? new List<IntensityViewModel>(),
-                })
-                .FirstAsync(w => w.Id == id);
-
-            return workout;
+            throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<WorkoutViewModel>> GetAllAsync()
+        public async Task<IEnumerable<WorkoutViewModel>> GetAllAsync(int athleteId)
         {
-            IEnumerable<IntensityViewModel> intensitysModels = await IntensityViewModels();
+            var intensities = await Intensities();
 
-            IEnumerable<WorkoutViewModel> workouts = await _repository.AllReadOnly<Workout>()
-                .Select(w => new WorkoutViewModel
+            var model = await _repository.AllReadOnly<Workout>()
+                .Where(w => w.AthleteId == athleteId)
+                .AsNoTracking()
+                .Select(x => new WorkoutViewModel 
                 {
-                    Id = w.Id
+                    Id = x.Id,
+                    AthleteId = x.AthleteId,
                 })
                 .ToListAsync();
 
-            foreach (WorkoutViewModel workout in workouts)
+            foreach (var workout in model)
             {
-                List<IntensityViewModel> intensitysViews = intensitysModels.Where(i => i.WorkoutId == workout.Id).ToList();
+                var intensitiesForWorkout = intensities.Where(i => i.WorkoutId == workout.Id);
 
-                workout.Intensities = intensitysViews;
+                workout.Intensities = intensitiesForWorkout;
             }
 
-            return workouts;
+            return model;
         }
 
-        private async Task< IEnumerable<IntensityViewModel>> IntensityViewModels()
+        public async Task<int> GetAthleteId(string userId)
         {
-            IEnumerable<IntensityViewModel> intensitysViewModels = await _intensityService.GetAllAsync();
+            var athlete = await _repository.AllReadOnly<Athlete>()
+                .Select(x => new AthleteViewModel
+                {
+                    Id = x.Id,
+                    UserId = x.UserID
+                })
+                .FirstAsync(a => a.UserId == userId);
 
-            return intensitysViewModels;
+            return athlete.Id;
+        }
+
+        private async Task<IEnumerable<IntensityViewModel>> Intensities()
+        {
+            var model = await _intensityService.GetAllAsync();
+
+            return model;
         }
     }
 }
