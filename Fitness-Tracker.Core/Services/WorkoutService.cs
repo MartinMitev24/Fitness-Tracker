@@ -19,6 +19,34 @@ namespace Fitness_Tracker.Core.Services
             _intensityService = intensityService;
         }
 
+        public async Task CreateWorkout(WorkoutFormModel model, int athleteId)
+        {
+            Workout workout = new Workout();
+
+            List<Intensity> intensityList = new List<Intensity>();
+
+            foreach (var intensityInModel in model.Intensities)
+            {
+                var intensity = new Intensity()
+                {
+                    ExerciseId = intensityInModel.ExerciseId,
+                    LiftedWeight = intensityInModel.Weight,
+                    Reps = intensityInModel.Reps,
+                    AvarageTimePerSet = intensityInModel.Time,
+                    Sets = intensityInModel.Sets
+                };
+
+                intensityList.Add(intensity);
+            }
+
+            workout.Intensities = intensityList;
+
+            workout.AthleteId = athleteId;
+
+            await _repository.AddAsync(workout);
+            await _repository.SaveAsync();
+        }
+
         public Task<WorkoutViewModel> FindWorkout(int id)
         {
             throw new NotImplementedException();
@@ -59,6 +87,21 @@ namespace Fitness_Tracker.Core.Services
                 .FirstAsync(a => a.UserId == userId);
 
             return athlete.Id;
+        }
+
+        public async Task<IEnumerable<ExerciseToChooseViewModel>> GetExerciseToChoose()
+        {
+            var exercises = await _repository.AllReadOnly<Exercise>()
+                .AsNoTracking()
+                .Select(x => new ExerciseToChooseViewModel
+                {
+                    Id = x.Id,
+                    Name = x.ExerciseName,
+                    MuscleType = x.TargetMuscleGroup.ToString()
+                })
+                .ToListAsync();
+
+            return exercises;
         }
 
         private async Task<IEnumerable<IntensityViewModel>> Intensities()
