@@ -1,0 +1,102 @@
+﻿@model WorkoutFormModel;
+
+@{
+	ViewBag.Title = "Add new workout.";
+
+	IEnumerable<ExerciseToChooseViewModel> exerciseToChooses = ViewBag.Exercises;
+	IEnumerable<IntensityFormModel> workoutData = ViewBag.WorkoutData;
+}
+
+<div class="container text-center">
+	<div class="row row-cols-3">
+		<div class="col-3"></div>
+		<div class="col-6">
+			<h2>@ViewBag.Title</h2>
+		</div>
+		<div class="col-3">
+		<!-- Button trigger modal -->
+			<button type="button" class="btn btn-light btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addExerciseToWorkout">Add Exercise to Workout</button>
+		</div>
+	</div>
+</div>
+<hr />
+<div class="container text-center">
+	<form method="post">
+		<div class="form-group">
+			<label asp-for="Intensities"></label>
+			@if(workoutData.Count() > 0)
+			{
+				foreach (var item in workoutData)
+				{
+					<div id="intensities" class="input-group w-100 border border-info p-2 m-2">
+						<div class="w-25">
+							<p>@exerciseToChooses.First(x => x.Id == item.ExerciseId).Name</p>
+						</div>
+						<div class="w-25">
+							<p>@item.Reps</p>
+						</div>
+						<div class="w-25">
+							<p>@item.Sets</p>
+						</div>
+						<div class="w-25">
+							<p>@item.Time</p>
+						</div>
+					</div>
+				}
+			}
+		</div>
+		<div class="d-grid gap-5 d-md-flex justify-content-md-center">
+			<input class="btn btn-light btn-outline-success" type="submit" value="Create workout" />
+		</div>
+	</form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addExerciseToWorkout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addExerciseToWorkoutLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title fs-5" id="addExerciseToWorkoutLabel">Add exersice data.</h3>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form id="addExerciseForm">
+					<div>
+						<select for="exerciseId" id="exerciseId" class="form-select w-100 p-2 border-dark border-1" name="exerciseId">
+							@foreach (var item in exerciseToChooses)
+							{
+								<option value="@item.Id">@item.Name</option>
+							}
+						</select>
+					</div>
+					<div>
+						<input for="weight" id="weight" type="text" class="form-control w-100 mt-2 p-2 border-dark border-1" name="weight" placeholder="Weight" />
+					</div>
+					<div>
+						<input for="reps" id="reps" type="text" class="form-control w-100 mt-2 p-2 border-dark border-1" name="reps" placeholder="Repetitions" />
+					</div>
+					<div>
+						<input for="sets" id="sets" type="text" class="form-control w-100 mt-2 p-2 border-dark border-1" name="sets" placeholder="Sets" />
+					</div>
+					<div>
+						<input for="time" id="time" type="text" class="form-control w-100 mt-2 p-2 border-dark border-1" name="time" placeholder="Average time" />
+					</div>
+					<div>
+						<hr class="mt-3 mb-3" />
+					</div>
+					<div class="container p-0 m-0">
+						<button type="submit" class="btn btn-light btn-outline-success w-100">Add Exercise to Workout</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<partial-name ="_ValidationScriptsPartial" />
+	<script src="~/js/jquery.add.exercise.js"></script>
+	<script>
+		var addExerciseUrl = '@Url.Action("AddExercise", "Workout")';
+	</script>
+}
