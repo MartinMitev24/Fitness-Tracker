@@ -26,17 +26,26 @@ namespace Fitness_Tracker.Core.Models.Exercise
         /// </summary>
         public required string ExerciseDescription { get; set; }
 
+        /// <summary>
+        /// Exercise new description.
+        /// </summary>
         [Required]
         [StringLength(ExerciseDescriptionMaxLength, MinimumLength = ExerciseDescriptionMinLength, ErrorMessage = StringLengthMessage)]
         public required string ExerciseNewDescription { get; set; } = string.Empty;
 
         /// <summary>
-        /// Integer value for muscle groupe of the exercice. 0=None, 1=Chest, 2=Back, 3=Shoulder, 4=Biceps, 5=Triceps, 6=Abdominal, 7=Legs and8=Compound
+        /// Integer value for Exercise targeted muscle group. Can be one of: 0=Stretches, 1=Chest, 2=Back, 3=Shoulder, 4=Biceps, 5=Triceps, 6=Abdominal, 7=Legs, 8=Compound.
         /// </summary>
         public TargetMuscleGroup TargetMuscleGroup { get; set; }
 
+        /// <summary>
+        /// Integer value for Exercise changed targeted muscle group. Can be one of: 0=Stretches, 1=Chest, 2=Back, 3=Shoulder, 4=Biceps, 5=Triceps, 6=Abdominal, 7=Legs, 8=Compound. 
+        /// </summary>
         public TargetMuscleGroup NewTargetMuscleGroup { get; set; }
 
+        /// <summary>
+        /// Example picture for exercise. 
+        /// </summary>
         [Url]
         public string ImageUrl { get; set; } = string.Empty;
     }
