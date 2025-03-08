@@ -2,6 +2,9 @@
 
 namespace Fitness_Tracker.Core.Models.Exercise
 {
+    /// <summary>
+    /// Class is used for viewing exercises.
+    /// </summary>
     public class ExerciseViewModel
     {
         /// <summary>
@@ -20,10 +23,13 @@ namespace Fitness_Tracker.Core.Models.Exercise
         public required string ExerciseDescription { get; set; }
 
         /// <summary>
-        /// Integer value for muscle groupe of the exercice. 0=None, 1=Chest, 2=Back, 3=Shoulder, 4=Biceps, 5=Triceps, 6=Abdominal, 7=Legs and8=Compound
+        /// Integer value for Exercise Targeted muscle group. Can be one of: 0=Stretches, 1=Chest, 2=Back, 3=Shoulder, 4=Biceps, 5=Triceps, 6=Abdominal, 7=Legs, 8=Compound.
         /// </summary>
         public TargetMuscleGroup TargetMuscleGroup { get; set; }
 
+        /// <summary>
+        /// Example picture for exercise.
+        /// </summary>
         public string ImageUrl { get; set; }
     }
 }
