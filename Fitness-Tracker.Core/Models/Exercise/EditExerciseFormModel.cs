@@ -5,6 +5,9 @@ using static Fitness_Tracker.Infrastructure.Data.Constants.ErrorMassages;
 
 namespace Fitness_Tracker.Core.Models.Exercise
 {
+    /// <summary>
+    /// Class is used for editing exercsie data.
+    /// </summary>
     public class EditExerciseFormModel
     {
         /// <summary>
@@ -17,6 +20,9 @@ namespace Fitness_Tracker.Core.Models.Exercise
         /// </summary>
         public required string ExerciseName { get; set; }
 
+        /// <summary>
+        /// Exercise new name. Type: string. Length between: 5 and 50 characters.
+        /// </summary>
         [Required]
         [StringLength(ExerciseNameMaxLength, MinimumLength = ExerciseNameMinLength, ErrorMessage = StringLengthMessage)]
         public required string ExerciseNewName { get; set; } = string.Empty;
@@ -27,7 +33,7 @@ namespace Fitness_Tracker.Core.Models.Exercise
         public required string ExerciseDescription { get; set; }
 
         /// <summary>
-        /// Exercise new description.
+        /// Exercise new description. Type: string. Length between: 5 and 1000 characters.
         /// </summary>
         [Required]
         [StringLength(ExerciseDescriptionMaxLength, MinimumLength = ExerciseDescriptionMinLength, ErrorMessage = StringLengthMessage)]
