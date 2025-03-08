@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Fitness_Tracker.Core.Services
 {
+    /// <summary>
+    /// Class is used to make CRUD operations for Workout entities.
+    /// </summary>
     public class WorkoutService : IWorkoutService
     {
         private readonly IRepository _repository;
@@ -19,6 +22,12 @@ namespace Fitness_Tracker.Core.Services
             _intensityService = intensityService;
         }
 
+        /// <summary>
+        /// Method to create a new workout.
+        /// </summary>
+        /// <param name="model">Receives class WorkoutFormModel.</param>
+        /// <param name="athleteId">Receives integer for athlete Identifier.</param>
+        /// <returns>Adds and saves new workout in database.</returns>
         public async Task CreateWorkout(WorkoutFormModel model, int athleteId)
         {
             Workout workout = new Workout();
@@ -47,11 +56,17 @@ namespace Fitness_Tracker.Core.Services
             await _repository.SaveAsync();
         }
 
+
         public Task<WorkoutViewModel> FindWorkout(int id)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Method to retreive all workout entities of an athlete from database.
+        /// </summary>
+        /// <param name="athleteId">Receives integer for athlete Identifier.</param>
+        /// <returns>List of all workouts of an athlete.</returns>
         public async Task<IEnumerable<WorkoutViewModel>> GetAllAsync(int athleteId)
         {
             var intensities = await Intensities();
@@ -76,6 +91,11 @@ namespace Fitness_Tracker.Core.Services
             return model;
         }
 
+        /// <summary>
+        /// Method to retreive current athlete identifier.
+        /// </summary>
+        /// <param name="userId">Receives string for user identifier.</param>
+        /// <returns>Integer for athlete identifier.</returns>
         public async Task<int> GetAthleteId(string userId)
         {
             var athlete = await _repository.AllReadOnly<Athlete>()
@@ -89,6 +109,10 @@ namespace Fitness_Tracker.Core.Services
             return athlete.Id;
         }
 
+        /// <summary>
+        /// Method to retreive exercises identifiers, names and muscle group.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<ExerciseToChooseViewModel>> GetExerciseToChoose()
         {
             var exercises = await _repository.AllReadOnly<Exercise>()
@@ -104,6 +128,10 @@ namespace Fitness_Tracker.Core.Services
             return exercises;
         }
 
+        /// <summary>
+        /// Private method to retreive all intensities.
+        /// </summary>
+        /// <returns>List of IntensitiyViewModels.</returns>
         private async Task<IEnumerable<IntensityViewModel>> Intensities()
         {
             var model = await _intensityService.GetAllAsync();
