@@ -8,6 +8,11 @@ using System.Text.Json;
 
 namespace Fitness_Tracker.Controllers
 {
+    /// <summary>
+    /// Class for WorkoutController.
+    /// 
+    /// Note: It is only for Authorized users. 
+    /// </summary>
     [Authorize]
     public class WorkoutController : Controller
     {
@@ -18,6 +23,10 @@ namespace Fitness_Tracker.Controllers
             _workoutService = workoutService;
         }
 
+        /// <summary>
+        /// HTTPGet Method for retreiving all workouts of an athlete.
+        /// </summary>
+        /// <returns>View model of a List of WorkoutViewModel for the athlete.</returns>
         [HttpGet]
         public async Task<IActionResult> All()
         {
@@ -30,6 +39,10 @@ namespace Fitness_Tracker.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// HTTPGet Method for creating new workouts.
+        /// </summary>
+        /// <returns>View model of WorkoutFormModel.</returns>
         [HttpGet]
         public async Task<IActionResult> AddWorkout()
         {
@@ -60,6 +73,11 @@ namespace Fitness_Tracker.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// HTTPPost Method for temporary storing data for new workout.
+        /// </summary>
+        /// <param name="intensity">Receives class IntensityFormModel withc stores the new workout data.</param>
+        /// <returns>Writes the temporary workout data to the new WorkoutFormModel. Stores the data in a temporary JSON file. Redirects to HTTPGet Method AddWorkou.</returns>
         [HttpPost]
         [IgnoreAntiforgeryToken]
         public IActionResult AddExercise(IntensityFormModel intensity)
@@ -100,6 +118,11 @@ namespace Fitness_Tracker.Controllers
             return RedirectToAction(nameof(AddWorkout));
         }
 
+        /// <summary>
+        /// HTTPPost Method for creating a new Workout of an Athlete.
+        /// </summary>
+        /// <param name="model">Receives class WorkoutFormModel.</param>
+        /// <returns>Adds and saves new workout to database. Redirects to All wokouts page for the athlete.</returns>
         [HttpPost]
         public async Task<IActionResult> AddWorkout(WorkoutFormModel model)
         {
