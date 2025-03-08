@@ -6,6 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Fitness_Tracker.Core.Services
 {
+    /// <summary>
+    /// Class is used for CRUD operations of exercise data set.
+    /// 
+    /// Note: Delete operations is not implemented.
+    /// </summary>
     public class ExerciseService : IExerciseService
     {
         private readonly IRepository _repository;
@@ -15,6 +20,10 @@ namespace Fitness_Tracker.Core.Services
             _repository = repository;
         }
 
+        /// <summary>
+        /// Method to retreive all entities from database.
+        /// </summary>
+        /// <returns>List of ExerciseViewModel.</returns>
         public async Task<IEnumerable<ExerciseViewModel>> GetAllAsync()
         {
             return await _repository.All<Exercise>()
@@ -29,6 +38,11 @@ namespace Fitness_Tracker.Core.Services
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Method is used for viewing exerces data.
+        /// </summary>
+        /// <param name="id">Receives integer for Exercise Idntifier</param>
+        /// <returns>ExerciseViewModel</returns>
         public async Task<ExerciseViewModel> FindExercise(int id)
         {
             var exercise = await _repository.AllReadOnly<Exercise>()
@@ -45,6 +59,11 @@ namespace Fitness_Tracker.Core.Services
             return exercise;
         }
 
+        /// <summary>
+        /// Method is used viewing when updating exercise data.
+        /// </summary>
+        /// <param name="id">Receives integer for Exercise Idntifier</param>
+        /// <returns>EditExerciseViewModel</returns>
         public async Task<EditExerciseFormModel> GetExercise(int id)
         {
             var exercise = await _repository.AllReadOnly<Exercise>()
@@ -63,6 +82,11 @@ namespace Fitness_Tracker.Core.Services
             return exercise;
         }
 
+        /// <summary>
+        /// Method is used for updating exercise data.
+        /// </summary>
+        /// <param name="model">Receives class EditExerciseFormModel</param>
+        /// <returns>Saves changes in database.</returns>
         public async Task EditExercise(EditExerciseFormModel model)
         {
             var exercise = await _repository.All<Exercise>()
@@ -76,6 +100,11 @@ namespace Fitness_Tracker.Core.Services
             await _repository.SaveAsync();
         }
 
+        /// <summary>
+        /// Method is used when creating new exercises.
+        /// </summary>
+        /// <param name="model">Receives class AddExerciseFormModel</param>
+        /// <returns>Adds and saves new entity.</returns>
         public async Task CreateExercise(AddExerciseFormModel model)
         {
             var newExercise = new Exercise()
