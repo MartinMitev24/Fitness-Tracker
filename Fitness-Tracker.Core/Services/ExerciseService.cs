@@ -21,7 +21,7 @@ namespace Fitness_Tracker.Core.Services
         }
 
         /// <summary>
-        /// Method to retreive all entities from database.
+        /// Method to retreive all exercise entities from database.
         /// </summary>
         /// <returns>List of ExerciseViewModel.</returns>
         public async Task<IEnumerable<ExerciseViewModel>> GetAllAsync()
