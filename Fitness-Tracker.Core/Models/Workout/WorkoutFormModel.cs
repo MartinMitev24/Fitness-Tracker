@@ -1,5 +1,4 @@
 ﻿using Fitness_Tracker.Core.Models.Intensity;
-using System.ComponentModel.DataAnnotations;
 
 namespace Fitness_Tracker.Core.Models.Workout
 {
@@ -8,8 +7,14 @@ namespace Fitness_Tracker.Core.Models.Workout
     /// </summary>
     public class WorkoutFormModel
     {
+        /// <summary>
+        /// Athlete identifier.
+        /// </summary>
         public int AthleteId { get; set; }
 
+        /// <summary>
+        /// Athlete workouts.
+        /// </summary>
         public IEnumerable<IntensityFormModel> Intensities { get; set; } = new List<IntensityFormModel>();
     }
 }
