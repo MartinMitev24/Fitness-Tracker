@@ -25,7 +25,7 @@ namespace Fitness_Tracker.Core.Models.Exercise
         public string Description { get; set; } = string.Empty;
 
         /// <summary>
-        /// Exercise Targeted muscle group. Can be one of: Stretches = 0, Chest = 1, Back = 2, Shoulder = 3, Biceps = 4, Triceps = 5, Abdominal = 6, Legs = 7, Compound = 8
+        /// Integer value for Exercise Targeted muscle group. Can be one of: 0=Stretches, 1=Chest, 2=Back, 3=Shoulder, 4=Biceps, 5=Triceps, 6=Abdominal, 7=Legs, 8=Compound.
         /// </summary>
         [Required]
         public TargetMuscleGroup TargetMuscleGroup { get; set; }
