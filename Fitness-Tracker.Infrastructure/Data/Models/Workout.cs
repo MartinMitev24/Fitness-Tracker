@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static Fitness_Tracker.Infrastructure.Data.Constants.DataConstants;
 
 namespace Fitness_Tracker.Infrastructure.Data.Models
 {
@@ -10,6 +11,13 @@ namespace Fitness_Tracker.Infrastructure.Data.Models
         [Key]
         [Comment("Workout identifier")]
         public int Id { get; init; }
+
+        [Comment("Workout type.")]
+        [MaxLength(WorkoutTypeMaxLength)]
+        public string WorkoutType { get; set; } = string.Empty;
+
+        [Comment("Boolean property for delete.")]
+        public bool IsDeleted { get; set; } = false;
 
         [Comment("User Identifier")]
         public int AthleteId { get; set; }

@@ -28,6 +28,9 @@ namespace Fitness_Tracker.Infrastructure.Data.Models
         [Comment("Avarage Number of seconds per one set.")]
         public int AvarageTimePerSet { get; set; }
 
+        [Comment("Boolean property for delete.")]
+        public bool IsDeleted { get; set; } = false;
+
         [Required]
         [Comment("Identifier of current exercise.")]
         public int ExerciseId { get; set; }

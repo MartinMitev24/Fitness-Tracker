@@ -27,6 +27,9 @@ namespace Fitness_Tracker.Infrastructure.Data.Models
         [Comment("Exercise muscle group")]
         public TargetMuscleGroup TargetMuscleGroup { get; set; }
 
+        [Comment("Boolean property for delete.")]
+        public bool IsDeleted { get; set; } = false;
+
         public string ImageUrl { get; set; } = string.Empty;
 
         public IEnumerable<Intensity> Intensities { get; set; } = new List<Intensity>();
