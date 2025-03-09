@@ -25,10 +25,10 @@
 				<div class="accordion-item" style="background-color: lightsteelblue">
 					<h2 class="accordion-header">
 						<button class="accordion-button alert-info collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#workout-@workout.Id" aria-expanded="false" aria-controls="workout-@workout.Id">
-							Workout @workout.Id
+							@workout.WorkoutType Workout
 						</button>
 					</h2>
-					<div id="workout-@workout.Id" class="accordion-collapse collapse" data-bs-parent="#workoutAccordion" style="">
+					<div id="workout-@workout.Id" class="accordion-collapse collapse" data-bs-parent="#workoutAccordion">
 						<div class="accordion-body m-0 p-3">
 							<table class="table table-info table-hover m-0" style="width: 100%">
 								<thead>
@@ -53,6 +53,10 @@
 									}
 								</tbody>
 							</table>
+						</div>
+						<div class="mb-3 me-3 text-end">
+							<a class="btn btn-secondary btn-outline-light" asp-controller="Workout" asp-action="Edit" asp-route-id="@workout.Id">Edit Workout</a>
+							<a class="btn btn-danger btn-outline-light" asp-controller="Workout" asp-action="Delete" asp-route-id="@workout.Id">Delete Workout</a>
 						</div>
 					</div>
 				</div>
