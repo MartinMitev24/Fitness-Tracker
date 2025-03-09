@@ -26,7 +26,9 @@ namespace Fitness_Tracker.Core.Services
         /// <returns>List of ExerciseViewModel.</returns>
         public async Task<IEnumerable<ExerciseViewModel>> GetAllAsync()
         {
-            return await _repository.All<Exercise>()
+            return await _repository.AllReadOnly<Exercise>()
+                .Where(e => e.IsDeleted == false)
+                .AsNoTracking()
                 .Select(e => new ExerciseViewModel
                 {
                     Id = e.Id,
