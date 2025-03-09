@@ -134,6 +134,7 @@ namespace Fitness_Tracker.Infrastructure.Data.SeedDb
             FirstWorkout = new Workout()
             {
                 Id = 1,
+                WorkoutType = "Full body.",
                 AthleteId = 2
             };
         }
