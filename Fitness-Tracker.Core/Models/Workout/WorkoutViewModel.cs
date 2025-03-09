@@ -13,6 +13,11 @@ namespace Fitness_Tracker.Core.Models.Workout
         public int Id { get; set; }
 
         /// <summary>
+        /// Property for Workout Type.
+        /// </summary>
+        public string WorkoutType { get; set; } = string.Empty;
+
+        /// <summary>
         /// Athlete identifier.
         /// </summary>
         public int AthleteId { get; set; }
