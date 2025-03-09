@@ -25,6 +25,7 @@ namespace Fitness_Tracker.Core.Services
         public async Task<IEnumerable<IntensityViewModel>> GetAllAsync()
         {
             IEnumerable<IntensityViewModel> intensities = await _repository.AllReadOnly<Intensity>()
+                .Where(i => i.IsDeleted == false)
                 .Select(i => new IntensityViewModel
                 {
                     Id = i.Id,
