@@ -7,5 +7,8 @@
 
         public const int ExerciseDescriptionMaxLength = 1000;
         public const int ExerciseDescriptionMinLength = 5;
+
+        public const int WorkoutTypeMaxLength = 50;
+        public const int WorkoutTypeMinLength = 3;
     }
 }
