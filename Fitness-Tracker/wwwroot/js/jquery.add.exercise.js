@@ -7,12 +7,6 @@
     var sets = $('#sets').val();
     var time = $('#time').val();
 
-    console.log(exerciseId);
-    console.log(weight);
-    console.log(reps);
-    console.log(sets);
-    console.log(time);
-
     $.ajax({
         url: addExerciseUrl,
         type: 'POST',
