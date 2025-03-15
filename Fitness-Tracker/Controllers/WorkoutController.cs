@@ -174,5 +174,14 @@ namespace Fitness_Tracker.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        public async Task Delete(WorkoutViewModel model)
+        {
+            var workoutID = model.Id;
+
+            await _workoutService.DeleteWorkout(workoutID);
+        }
+
     }
 }
