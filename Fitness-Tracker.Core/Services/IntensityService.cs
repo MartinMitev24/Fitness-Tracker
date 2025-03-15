@@ -41,9 +41,23 @@ namespace Fitness_Tracker.Core.Services
             return intensities;
         }
 
-        public Task<IntensityViewModel> FindIntensity(int id)
+        public async Task<IntensityViewModel> FindIntensity(int id)
         {
-            throw new NotImplementedException();
+            var intensity = await _repository.AllReadOnly<Intensity>()
+                .Where(i => i.IsDeleted == false)
+                .Select(i => new IntensityViewModel
+                {
+                    Id = i.Id,
+                    ExerciseName = i.Exercise.ExerciseName,
+                    LiftedWeight = i.LiftedWeight,
+                    Reps = i.Reps,
+                    Sets = i.Sets,
+                    AvarageTimePerSet = i.AvarageTimePerSet,
+                    WorkoutId = i.WorkoutId
+                })
+                .FirstAsync(i => i.Id == id);
+
+            return intensity;
         }
     }
 }
