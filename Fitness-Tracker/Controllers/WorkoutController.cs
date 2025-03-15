@@ -166,5 +166,13 @@ namespace Fitness_Tracker.Controllers
 
             return RedirectToAction(nameof(All));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var model = await _workoutService.FindWorkout(id);
+
+            return View(model);
+        }
     }
 }

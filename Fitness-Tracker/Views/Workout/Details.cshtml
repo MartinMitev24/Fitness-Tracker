@@ -1,0 +1,48 @@
+﻿@model WorkoutViewModel
+
+@{
+	ViewBag.Title = Model.WorkoutType + " Details.";
+}
+
+
+<section class="container justify-content-around">
+	<p></p>
+	<p>
+		<h2 class="text-center">@ViewBag.Title</h2>
+	</p>
+	<p>
+	</p>
+</section>
+
+<section class="container">
+	@if (Model.Intensities.Any())
+	{
+		<table class="table table-info table-hover m-0" style="width: 100%">
+			<thead>
+				<tr>
+					<th>Exercise</th>
+					<th>Weight</th>
+					<th>Reps</th>
+					<th>Sets</th>
+					<th>Avr. time</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var intensity in Model.Intensities)
+				{
+					<tr>
+						<td>@intensity.ExerciseName</td>
+						<td>@intensity.LiftedWeight</td>
+						<td>@intensity.Reps</td>
+						<td>@intensity.Sets</td>
+						<td>@intensity.AvarageTimePerSet</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<h3>There are no exercises for this workout.</h3>
+	}
+</section>
