@@ -58,7 +58,21 @@ namespace Fitness_Tracker.Core.Services
 
         public async Task DeleteWorkout(int id)
         {
-            throw new NotImplementedException();
+            var intensities = await _repository.All<Intensity>()
+                .Where(i => i.WorkoutId == id)
+                .ToListAsync();
+
+            foreach (var item in intensities)
+            {
+                item.IsDeleted = true;
+            }
+
+            var model = await _repository.All<Workout>()
+                .FirstAsync(w => w.Id == id);
+
+            model.IsDeleted = true;
+
+            await _repository.SaveAsync();
         }
 
         public async Task<WorkoutViewModel> FindWorkout(int id)
