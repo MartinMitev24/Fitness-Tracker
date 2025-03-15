@@ -13,5 +13,7 @@ namespace Fitness_Tracker.Core.Contracts
         Task<IEnumerable<ExerciseToChooseViewModel>> GetExerciseToChoose();
 
         Task CreateWorkout(WorkoutFormModel model, int athleteId);
+
+        Task DeleteWorkout(int id);
     }
 }

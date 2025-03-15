@@ -56,10 +56,34 @@ namespace Fitness_Tracker.Core.Services
             await _repository.SaveAsync();
         }
 
-
-        public Task<WorkoutViewModel> FindWorkout(int id)
+        public async Task DeleteWorkout(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<WorkoutViewModel> FindWorkout(int id)
+        {
+            var workout = await _repository.AllReadOnly<Workout>()
+                .Where(w => w.IsDeleted == false)
+                .Select(w => new WorkoutViewModel
+                {
+                    Id = w.Id,
+                    AthleteId = w.AthleteId,
+                    WorkoutType = w.WorkoutType,
+                    Intensities = new List<IntensityViewModel>()
+                })
+                .FirstAsync(w => w.Id == id);
+
+            var intensities = await Intensities();
+
+            var intensitiesForWorkout = intensities.Where(i => i.WorkoutId == workout.Id);
+                
+            if (intensitiesForWorkout.Any())
+            {
+                workout.Intensities = intensitiesForWorkout;
+            }
+
+            return workout;
         }
 
         /// <summary>
@@ -72,11 +96,11 @@ namespace Fitness_Tracker.Core.Services
             var intensities = await Intensities();
 
             var model = await _repository.AllReadOnly<Workout>()
-                .Where(w => w.AthleteId == athleteId)
-                .AsNoTracking()
+                .Where(w => w.AthleteId == athleteId && w.IsDeleted == false)
                 .Select(x => new WorkoutViewModel 
                 {
                     Id = x.Id,
+                    WorkoutType = x.WorkoutType,
                     AthleteId = x.AthleteId,
                 })
                 .ToListAsync();
@@ -116,7 +140,7 @@ namespace Fitness_Tracker.Core.Services
         public async Task<IEnumerable<ExerciseToChooseViewModel>> GetExerciseToChoose()
         {
             var exercises = await _repository.AllReadOnly<Exercise>()
-                .AsNoTracking()
+                .Where(e => e.IsDeleted == false)
                 .Select(x => new ExerciseToChooseViewModel
                 {
                     Id = x.Id,
