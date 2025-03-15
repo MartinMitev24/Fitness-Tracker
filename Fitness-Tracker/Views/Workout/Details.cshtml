@@ -11,6 +11,8 @@
 		<h2 class="text-center">@ViewBag.Title</h2>
 	</p>
 	<p>
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-light btn-outline-danger" data-id="@Model.Id" data-bs-toggle="modal" data-bs-target="#deleteWorkout">Delete Workout</button>
 	</p>
 </section>
 
@@ -46,3 +48,33 @@
 		<h3>There are no exercises for this workout.</h3>
 	}
 </section>
+
+
+<!--Modal-->
+<div class="modal fade" id="deleteWorkout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteWorkoutLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title fs-5" id="addExerciseToWorkoutLabel">Add exersice data.</h3>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div>
+					<h3>Do you want to delete workout</h3>
+				</div>
+				<form id="deleteWorkoutForm" method="post">
+					<div>
+						<input for="workoutId" id="workoutId" type="text" class="form-control visually-hidden-focusable" name="workoutId" placeholder="Workout Id" />
+					</div>
+					<div class="container p-0 m-0">
+						<input type="submit" class="btn btn-light btn-outline-danger w-50" value="Delete Workout" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script src="~/js/pass.workout.id.to.modal.js"></script>
+}
