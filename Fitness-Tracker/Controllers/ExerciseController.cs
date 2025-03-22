@@ -1,5 +1,6 @@
 ﻿using Fitness_Tracker.Core.Contracts;
 using Fitness_Tracker.Core.Models.Exercise;
+using Fitness_Tracker.Infrastructure.Data.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fitness_Tracker.Controllers
@@ -24,6 +25,9 @@ namespace Fitness_Tracker.Controllers
         public async Task<IActionResult> All()
         {
             IEnumerable<ExerciseViewModel> model = await _exerciseService.GetAllAsync();
+
+            var muscleGroups = Enum.GetNames(typeof(TargetMuscleGroup)).ToList();
+            ViewBag.MuscleGroups = muscleGroups;
 
             return View(model);
         }

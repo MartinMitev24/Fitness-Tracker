@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "All Exercises";
+    var muscleGroups = ViewBag.MuscleGroups;
 }
 <div class="container text-center">
 
@@ -23,10 +24,10 @@
         <hr />
     </div>
 
-    @foreach (var muscleGroup in Enum.GetNames(typeof(TargetMuscleGroup)))
+    @foreach (var muscleGroup in muscleGroups)
     {
         <div class="container text-start">
-            <h3>@muscleGroup.ToString()</h3>
+            <h3>@muscleGroup</h3>
         </div>
         @if(!Model.Any())
         {
@@ -38,7 +39,7 @@
                 <div class="row row-cols-2">
                     @foreach (var item in Model)
                     {
-                        @if (item.TargetMuscleGroup.ToString() == muscleGroup.ToString())
+                        @if (item.TargetMuscleGroup.ToString() == muscleGroup)
                         {
                             <div class="card-group border-0 p-lg-1">
                                 <div class="card border-secondary border-2">
