@@ -11,6 +11,11 @@
         public int ExerciseId { get; set; }
 
         /// <summary>
+        /// Property for targeted muscle group of the exercise.
+        /// </summary>
+        public string TargetMuscleGroup { get; set; } = string.Empty;
+
+        /// <summary>
         /// Integer for the used weight.
         /// </summary>
         public int Weight { get; set; }
