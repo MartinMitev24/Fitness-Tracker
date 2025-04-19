@@ -1,7 +1,4 @@
 ﻿using Fitness_Tracker.Core.Models.Intensity;
-using System.ComponentModel.DataAnnotations;
-using static Fitness_Tracker.Infrastructure.Data.Constants.DataConstants;
-using static Fitness_Tracker.Infrastructure.Data.Constants.ErrorMassages;
 
 namespace Fitness_Tracker.Core.Models.Workout
 {
@@ -18,7 +15,6 @@ namespace Fitness_Tracker.Core.Models.Workout
         /// <summary>
         /// Property for WorkoutType.
         /// </summary>
-        [StringLength(WorkoutTypeMaxLength, MinimumLength = WorkoutTypeMinLength, ErrorMessage = StringLengthMessage)]
         public string WorkoutType { get; set; } = string.Empty;
 
         /// <summary>
