@@ -5,6 +5,7 @@ using Fitness_Tracker.Core.Models.Workout;
 using Fitness_Tracker.Infrastructure.Data.Common;
 using Fitness_Tracker.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace Fitness_Tracker.Core.Services
 {
@@ -34,6 +35,8 @@ namespace Fitness_Tracker.Core.Services
 
             List<Intensity> intensityList = new List<Intensity>();
 
+            List<string> ExercisesTypes = new List<string>();
+
             foreach (var intensityInModel in model.Intensities)
             {
                 var intensity = new Intensity()
@@ -46,7 +49,14 @@ namespace Fitness_Tracker.Core.Services
                 };
 
                 intensityList.Add(intensity);
+
+                if (!ExercisesTypes.Contains(intensityInModel.TargetMuscleGroup))
+                {
+                    ExercisesTypes.Add(intensityInModel.TargetMuscleGroup);
+                }
             }
+
+            workout.WorkoutType = SetWorkoutType(ExercisesTypes);
 
             workout.Intensities = intensityList;
 
@@ -175,6 +185,18 @@ namespace Fitness_Tracker.Core.Services
             var model = await _intensityService.GetAllAsync();
 
             return model;
+        }
+
+        /// <summary>
+        /// Private method to set the workout name by combining the names of the targeted muscle groups.
+        /// </summary>
+        /// <param name="ExercisesTypes">A list of type string with the selected exercices targerted muscle group.</param>
+        /// <returns></returns>
+        private string SetWorkoutType(List<string> ExercisesTypes)
+        {
+            string workoutType = string.Join(", ",ExercisesTypes);
+
+            return workoutType;
         }
     }
 }
