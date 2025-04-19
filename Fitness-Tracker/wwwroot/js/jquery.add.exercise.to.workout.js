@@ -2,6 +2,7 @@
     e.preventDefault();
 
     var exerciseId = $('#exerciseId').val();
+    var targetMuscleGroup = $('#muscleGroup').val();
     var weight = $('#weight').val();
     var reps = $('#reps').val();
     var sets = $('#sets').val();
@@ -12,6 +13,7 @@
         type: 'POST',
         data: {
             exerciseId: exerciseId,
+            targetMuscleGroup: targetMuscleGroup,
             weight: weight,
             reps: reps,
             sets: sets,

@@ -1,6 +1,7 @@
 ﻿using Fitness_Tracker.Core.Contracts;
 using Fitness_Tracker.Core.Models.Intensity;
 using Fitness_Tracker.Core.Models.Workout;
+using Fitness_Tracker.Infrastructure.Data.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -69,6 +70,9 @@ namespace Fitness_Tracker.Controllers
 
             ViewBag.WorkoutData = workoutData;
             ViewBag.Exercises = exerciseToChooses;
+            
+            var muscleGroups = Enum.GetNames(typeof(TargetMuscleGroup)).ToList();
+            ViewBag.MuscleGroups = muscleGroups;
 
             return View(model);
         }

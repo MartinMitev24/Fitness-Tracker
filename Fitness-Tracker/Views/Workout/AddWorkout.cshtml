@@ -5,6 +5,7 @@
 
 	IEnumerable<ExerciseToChooseViewModel> exerciseToChooses = ViewBag.Exercises;
 	IEnumerable<IntensityFormModel> workoutData = ViewBag.WorkoutData;
+	IEnumerable<string> muscleGroups = ViewBag.MuscleGroups;
 }
 
 <div class="container text-center">
@@ -28,17 +29,23 @@
 			{
 				foreach (var item in workoutData)
 				{
-					<div id="intensities" class="input-group w-100 border border-info p-2 m-2">
-						<div class="w-25">
+					<div id="intensities" class="input-group justify-content-between w-100 border border-info p-2 m-2">
+						<div>
 							<p>@exerciseToChooses.First(x => x.Id == item.ExerciseId).Name</p>
 						</div>
-						<div class="w-25">
+						<div>
+							<p>@exerciseToChooses.First(x => x.Id == item.ExerciseId).MuscleType</p>
+						</div>
+						<div>
+							<p>@item.Weight</p>
+						</div>
+						<div>
 							<p>@item.Reps</p>
 						</div>
-						<div class="w-25">
+						<div>
 							<p>@item.Sets</p>
 						</div>
-						<div class="w-25">
+						<div>
 							<p>@item.Time</p>
 						</div>
 					</div>
@@ -62,10 +69,20 @@
 			<div class="modal-body">
 				<form id="addExerciseForm">
 					<div>
-						<select for="exerciseId" id="exerciseId" class="form-select w-100 p-2 border-dark border-1" name="exerciseId">
+						<select for="muscleGroup" id="muscleGroup" class="form-select w-100 p-2 border-dark border-1" name="muscleGroup">
+							<option value="none">Select muscle group</option>
+							@foreach (var item in muscleGroups)
+							{
+								<option value="@item">@item</option>
+							}
+						</select>
+					</div>
+					<div id="exerciseSelect">
+						<select for="exerciseId" id="exerciseId" class="form-select w-100 mt-2 p-2 border-dark border-1" name="exerciseId">
+							<option value="none">Select exercise</option>
 							@foreach (var item in exerciseToChooses)
 							{
-								<option value="@item.Id">@item.Name</option>
+								<option value="@item.Id" data-muscleGroup="@item.MuscleType">@item.Name</option>
 							}
 						</select>
 					</div>
@@ -95,6 +112,7 @@
 
 @section Scripts {
 	<partial-name ="_ValidationScriptsPartial" />
+	<script src="~/js/jquery.filter.exercises.to.add.js"></script>
 	<script src="~/js/jquery.add.exercise.to.workout.js"></script>
 	<script>
 		var addExerciseUrl = '@Url.Action("AddExercise", "Workout")';
