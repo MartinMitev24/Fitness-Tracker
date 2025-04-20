@@ -30,6 +30,11 @@ namespace Fitness_Tracker.Core.Models.Exercise
         /// <summary>
         /// Example picture for exercise.
         /// </summary>
-        public string ImageUrl { get; set; }
+        public string ImageUrl { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Boolien property for deleting exercises.
+        /// </summary>
+        public bool IsDeleted { get; set; }
     }
 }
