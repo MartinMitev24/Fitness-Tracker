@@ -14,6 +14,10 @@
             <div class="col-3">
                 <a class="btn btn-outline-dark bg-warning bg-opacity-75" asp-controller="Exercise" asp-action="Edit" asp-route-id="@Model.Id" asp-route-information="">Edit</a>
             </div>
+            <div>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-light btn-outline-danger" data-id="@Model.Id" data-bs-toggle="modal" data-bs-target="#deleteExercise">Delete Exercise</button>
+            </div>
         </div>
         <hr />
     </div>
@@ -27,3 +31,37 @@
         <p class="text-md-start">@Model.ExerciseDescription</p>
     </div>
 </div>
+
+<!--Modal-->
+<div class="modal fade" id="deleteExercise" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteExerciseLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title fs-5" id="deleteExerciseLabel">Delete exercise.</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h3>Do you want to delete exercise?</h3>
+                </div>
+                <form id="deleteExerciseForm" method="post">
+                    <div>
+                        <input for="exerciseId" id="exerciseId" type="text" class="form-control visually-hidden-focusable" name="exerciseId" placeholder="Exercise Id" />
+                    </div>
+                    <div class="container p-0 m-0">
+                        <input type="submit" class="btn btn-light btn-outline-danger w-50" value="Delete Exercise" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/pass.exercise.id.to.modal.js"></script>
+    <script src="~/js/jquery.delete.exercise.by.id.js"></script>
+    <script>
+        var getExerciseIdURL = '@Url.Action("Delete", "Exercise")';
+    </script>
+}

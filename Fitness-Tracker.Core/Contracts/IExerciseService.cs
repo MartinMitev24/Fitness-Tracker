@@ -13,5 +13,7 @@ namespace Fitness_Tracker.Core.Contracts
         Task EditExercise(EditExerciseFormModel model);
 
         Task CreateExercise(AddExerciseFormModel model);
+
+        Task DeleteExercise(int id);
     }
 }

@@ -36,7 +36,9 @@ namespace Fitness_Tracker.Core.Services
                     ExerciseDescription = e.ExerciseDescription,
                     TargetMuscleGroup = e.TargetMuscleGroup,
                     ImageUrl = e.ImageUrl,
+                    IsDeleted = e.IsDeleted
                 })
+                .Where(e => e.IsDeleted == false)
                 .ToListAsync();
         }
 
@@ -54,7 +56,8 @@ namespace Fitness_Tracker.Core.Services
                     ExerciseName = e.ExerciseName,
                     ExerciseDescription = e.ExerciseDescription,
                     TargetMuscleGroup = e.TargetMuscleGroup,
-                    ImageUrl = e.ImageUrl
+                    ImageUrl = e.ImageUrl,
+                    IsDeleted = e.IsDeleted
                 })
                 .FirstOrDefaultAsync(e => e.Id == id);
 
@@ -118,6 +121,16 @@ namespace Fitness_Tracker.Core.Services
             };
 
             await _repository.AddAsync(newExercise);
+            await _repository.SaveAsync();
+        }
+
+        public async Task DeleteExercise(int exercisID)
+        {
+            var exercise = await _repository.All<Exercise>()
+                .FirstOrDefaultAsync(e => e.Id == exercisID);
+
+            exercise.IsDeleted = true;
+
             await _repository.SaveAsync();
         }
     }

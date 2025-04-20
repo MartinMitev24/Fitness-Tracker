@@ -97,5 +97,13 @@ namespace Fitness_Tracker.Controllers
 
             return RedirectToAction(nameof(All));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _exerciseService.DeleteExercise(id);
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }
