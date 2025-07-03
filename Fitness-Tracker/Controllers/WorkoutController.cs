@@ -91,33 +91,7 @@ namespace Fitness_Tracker.Controllers
                 return View(intensity);
             }
 
-            if (TempData.ContainsKey("WorkoutData"))
-            {
-                string json = string.Empty;
-
-                if (TempData["WorkoutData"] is string data)
-                {
-                    json = data;
-                }
-
-                List<IntensityFormModel> workoutData = JsonSerializer.Deserialize<List<IntensityFormModel>>(json);
-
-                workoutData.Add(intensity);
-
-                json = JsonSerializer.Serialize<List<IntensityFormModel>>(workoutData);
-
-                TempData["WorkoutData"] = json;
-            }
-            else
-            {
-                List<IntensityFormModel> workoutData = new List<IntensityFormModel>();
-
-                workoutData.Add(intensity);
-
-                string json = JsonSerializer.Serialize<List<IntensityFormModel>>(workoutData);
-
-                TempData["WorkoutData"] = json;
-            }
+            ExtractWorkoutData(intensity);
 
             return RedirectToAction(nameof(AddWorkout));
         }
@@ -187,5 +161,108 @@ namespace Fitness_Tracker.Controllers
             await _workoutService.DeleteWorkout(workoutID);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = await _workoutService.FindWorkout(id);
+
+            IEnumerable<ExerciseToChooseViewModel> exerciseToChooses = await _workoutService.GetExerciseToChoose();
+            List<string> muscleGroups = Enum.GetNames(typeof(TargetMuscleGroup)).ToList();
+
+            List<IntensityFormModel> workoutData = new List<IntensityFormModel>();
+
+            if (TempData["WorkoutData"] is string json)
+            {
+                workoutData = JsonSerializer.Deserialize<List<IntensityFormModel>>(json);
+
+                TempData.Keep("WorkoutData");
+            }
+
+
+            if (TempData.ContainsKey("WorkoutId") == false)
+            {
+                TempData.Add("WorkoutId", model.Id.ToString());
+            }
+
+            ViewBag.Exercises = exerciseToChooses;
+            ViewBag.MuscleGroups = muscleGroups;
+            ViewBag.WorkoutData = workoutData;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public IActionResult AddExerciseInEdit(IntensityFormModel intensity)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(intensity);
+            }
+
+            ExtractWorkoutData(intensity);
+
+            int id = 0;
+
+            if (TempData.ContainsKey("WorkoutId") && TempData["WorkoutId"] is string data)
+            {
+                id = int.Parse(data);
+            }
+
+            return RedirectToAction(nameof(Edit), new {id = id});
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, WorkoutViewModel model)
+        {
+            List<IntensityFormModel> intensities = new List<IntensityFormModel>();
+
+            if (TempData["WorkoutData"] is string json)
+            {
+                intensities = JsonSerializer.Deserialize<List<IntensityFormModel>>(json);
+            }
+
+            if (!ModelState.IsValid || intensities.Count() < 1)
+            {
+                return RedirectToAction(nameof(Edit), new {id = model.Id});
+            }
+
+            TempData.Remove("WorkoutData");
+
+            await _workoutService.EditWorkout(model.Id, intensities);
+
+            return RedirectToAction(nameof(Details), new {id = model.Id});
+        }
+
+        private void ExtractWorkoutData(IntensityFormModel intensity)
+        {
+            if (TempData.ContainsKey("WorkoutData"))
+            {
+                string json = string.Empty;
+
+                if (TempData["WorkoutData"] is string data)
+                {
+                    json = data;
+                }
+
+                List<IntensityFormModel> workoutData = JsonSerializer.Deserialize<List<IntensityFormModel>>(json);
+
+                workoutData.Add(intensity);
+
+                json = JsonSerializer.Serialize<List<IntensityFormModel>>(workoutData);
+
+                TempData["WorkoutData"] = json;
+            }
+            else
+            {
+                List<IntensityFormModel> workoutData = new List<IntensityFormModel>();
+
+                workoutData.Add(intensity);
+
+                string json = JsonSerializer.Serialize<List<IntensityFormModel>>(workoutData);
+
+                TempData["WorkoutData"] = json;
+            }
+        }
     }
 }

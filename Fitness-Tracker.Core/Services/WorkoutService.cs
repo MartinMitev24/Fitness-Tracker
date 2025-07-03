@@ -110,6 +110,20 @@ namespace Fitness_Tracker.Core.Services
             return workout;
         }
 
+        public async Task<Workout> GetWorkout(int id)
+        {
+            var workout = await _repository.All<Workout>()
+                .Where(w => w.IsDeleted == false)
+                .FirstAsync(w => w.Id == id);
+
+            var intensities = await _repository.All<Intensity>()
+                .Where(i => i.IsDeleted == false && i.WorkoutId == workout.Id)
+                .ToListAsync();
+
+            workout.Intensities = intensities;
+
+            return workout;
+        }
         /// <summary>
         /// Method to retreive all workout entities of an athlete from database.
         /// </summary>
@@ -174,6 +188,36 @@ namespace Fitness_Tracker.Core.Services
                 .ToListAsync();
 
             return exercises;
+        }
+
+        public async Task EditWorkout(int id, List<IntensityFormModel> intensities)
+        {
+            var workout = await GetWorkout(id);
+
+            if (workout.Intensities.Any())
+            {
+                foreach (var intensity in workout.Intensities)
+                {
+                    intensity.IsDeleted = true;
+                }
+            }
+
+            foreach (var intensity in intensities) 
+            {
+                Intensity newIntensity = new Intensity()
+                {
+                    ExerciseId = intensity.ExerciseId,
+                    LiftedWeight = intensity.Weight,
+                    Reps = intensity.Reps,
+                    Sets = intensity.Sets,
+                    AvarageTimePerSet = intensity.Time,
+                    WorkoutId = workout.Id
+                };
+
+                await _repository.AddAsync(newIntensity);
+            }
+
+            await _repository.SaveAsync();
         }
 
         /// <summary>
