@@ -66,6 +66,11 @@ namespace Fitness_Tracker.Core.Services
             await _repository.SaveAsync();
         }
 
+        /// <summary>
+        /// Method to change entities "IsDeleted" param, of a single workout, to "True" of types workou and intensities that are connected with each other.
+        /// </summary>
+        /// <param name="id">Recieves workout identifier of type integer.</param>
+        /// <returns></returns>
         public async Task DeleteWorkout(int id)
         {
             var intensities = await _repository.All<Intensity>()
@@ -85,6 +90,12 @@ namespace Fitness_Tracker.Core.Services
             await _repository.SaveAsync();
         }
 
+        /// <summary>
+        /// Method that finds workout by identifier.
+        /// The found entity is not tracked by db tracker.
+        /// </summary>
+        /// <param name="id">Recieves workout identifier of type integer.</param>
+        /// <returns>Returns Class WorkoutViewModel</returns>
         public async Task<WorkoutViewModel> FindWorkout(int id)
         {
             var workout = await _repository.AllReadOnly<Workout>()
@@ -110,6 +121,12 @@ namespace Fitness_Tracker.Core.Services
             return workout;
         }
 
+        /// <summary>
+        /// Method that finds workout by identifier.
+        /// The found entity is tracked by db tracker.
+        /// </summary>
+        /// <param name="id">Recieves workout identifier of type integer.</param>
+        /// <returns>Rturns class Workou</returns>
         public async Task<Workout> GetWorkout(int id)
         {
             var workout = await _repository.All<Workout>()
@@ -124,6 +141,7 @@ namespace Fitness_Tracker.Core.Services
 
             return workout;
         }
+        
         /// <summary>
         /// Method to retreive all workout entities of an athlete from database.
         /// </summary>
@@ -190,6 +208,14 @@ namespace Fitness_Tracker.Core.Services
             return exercises;
         }
 
+        /// <summary>
+        /// Mthod for editing exercise data in a workout.
+        /// Sets the "IsDeleted" property to "True" in the existing workout data.
+        /// Creates new entities for the new exercise data of the workout.
+        /// </summary>
+        /// <param name="id">Recives workout identifier of type integer.</param>
+        /// <param name="intensities">Recives new exercise data of type "List<IntensityFormModel>"</param>
+        /// <returns></returns>
         public async Task EditWorkout(int id, List<IntensityFormModel> intensities)
         {
             var workout = await GetWorkout(id);

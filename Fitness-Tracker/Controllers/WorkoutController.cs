@@ -145,6 +145,11 @@ namespace Fitness_Tracker.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        /// <summary>
+        /// HTTP Get Method for viewing a workout.
+        /// </summary>
+        /// <param name="id">Recieves workout identifier of typy integer.</param>
+        /// <returns>View of workoutViewModel</returns>
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
@@ -153,6 +158,12 @@ namespace Fitness_Tracker.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// HTTP Post Method for deleting a workout.
+        /// Changes the value of the boolien "IsDeleted" property to "True" in the entity class.
+        /// </summary>
+        /// <param name="model">Recieves workout identifier of typy integer.</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task Delete(WorkoutViewModel model)
         {
@@ -161,6 +172,11 @@ namespace Fitness_Tracker.Controllers
             await _workoutService.DeleteWorkout(workoutID);
         }
 
+        /// <summary>
+        /// HTTP Get Method for editing performed exercises in a workout.
+        /// </summary>
+        /// <param name="id">Recieves workout identifier of typy integer.</param>
+        /// <returns>View of WorkoutViewModel.</returns>
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -191,6 +207,11 @@ namespace Fitness_Tracker.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// HTTP Post Method for temporary storing the new data of a workout.
+        /// </summary>
+        /// <param name="intensity">Receives class IntensityFormModel withc stores the new workout data.</param>
+        /// <returns>Redirects to HTTP Post method "Edit" witn route param "workoutId".</returns>
         [HttpPost]
         [IgnoreAntiforgeryToken]
         public IActionResult AddExerciseInEdit(IntensityFormModel intensity)
@@ -212,6 +233,12 @@ namespace Fitness_Tracker.Controllers
             return RedirectToAction(nameof(Edit), new {id = id});
         }
 
+        /// <summary>
+        /// HTTP Post Method for editing exercise data of a workout.
+        /// </summary>
+        /// <param name="id">Receives workout identifier of type integer.</param>
+        /// <param name="model">Receives class WorkoutViewModel.</param>
+        /// <returns>Redirects to action "Details" with a route param "workoutId".</returns>
         [HttpPost]
         public async Task<IActionResult> Edit(int id, WorkoutViewModel model)
         {
@@ -234,6 +261,10 @@ namespace Fitness_Tracker.Controllers
             return RedirectToAction(nameof(Details), new {id = model.Id});
         }
 
+        /// <summary>
+        /// Private void method that extracts or create a temporary JSON file with exercise data.
+        /// </summary>
+        /// <param name="intensity">Receives class IntensityFormModel</param>
         private void ExtractWorkoutData(IntensityFormModel intensity)
         {
             if (TempData.ContainsKey("WorkoutData"))
