@@ -194,7 +194,6 @@ namespace Fitness_Tracker.Controllers
                 TempData.Keep("WorkoutData");
             }
 
-
             if (TempData.ContainsKey("WorkoutId") == false)
             {
                 TempData.Add("WorkoutId", model.Id.ToString());
@@ -211,7 +210,7 @@ namespace Fitness_Tracker.Controllers
         /// HTTP Post Method for temporary storing the new data of a workout.
         /// </summary>
         /// <param name="intensity">Receives class IntensityFormModel withc stores the new workout data.</param>
-        /// <returns>Redirects to HTTP Post method "Edit" witn route param "workoutId".</returns>
+        /// <returns>Redirects to HTTP Get method "Edit" witn route param "workoutId".</returns>
         [HttpPost]
         [IgnoreAntiforgeryToken]
         public IActionResult AddExerciseInEdit(IntensityFormModel intensity)
